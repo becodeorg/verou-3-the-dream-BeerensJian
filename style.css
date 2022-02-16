@@ -34,12 +34,8 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 .box p {
     font-weight: bold;
     padding-top: 30px;
-}
-form {
-
 }

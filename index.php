@@ -1,7 +1,32 @@
 <?php
-//var_dump($_GET);
+var_dump($_GET);
 //var_dump($_POST);
 $rateJapan = 131;
+
+$result = 0;
+switch ([$_GET["myCurrency1"], $_GET["myCurrency"]]) {
+    case ["EUR" , "USD"]:
+        $result = $_GET["amountEuro"] * 1.14 ;
+        break;
+    case ["EUR" , "YEN"]:
+        $result = $_GET["amountEuro"] * $rateJapan ;
+        break;
+    case ["USD" , "YEN"]:
+        $result = $_GET["amountEuro"] * 115 ;
+        break;
+    case ["USD" , "EUR"]:
+        $result = $_GET["amountEuro"] * 0.88 ;
+        break;
+    case ["YEN" , "EUR"]:
+        $result = $_GET["amountEuro"] * 0.0076;
+        break;
+    case ["YEN" , "USD"]:
+        $result = $_GET["amountEuro"] * 0.0087 ;
+        break;
+    default:
+        $result = $_GET["amountEuro"] ;
+}
+
 
 ?>
 <!doctype html>
@@ -21,12 +46,25 @@ $rateJapan = 131;
     <main>
         <div class="box">
             <form action="" method="get">
-                <label for="exchange">Enter your amount in euro</label>
-                <input type="text" name="amountEuro" id="exchange">
-
+                <label for="exchange">Enter your amount:</label>
+                <input type="text" name="amountEuro" id="exchange"> <br>
+                <label for="myCountry1"></label>
+                <input list="countries" name="myCurrency1" id="myCountry"/>
+                <datalist id="countries">
+                    <option value="EUR">
+                    <option value="USD">
+                    <option value="YEN">
+                </datalist>
+                <label for="myCountry">To What currency?</label> <br>
+                <input list="countries" name="myCurrency" id="myCountry"/>
+                <datalist id="countries">
+                    <option value="EUR">
+                    <option value="USD">
+                    <option value="YEN">
+                </datalist>
                 <input type="submit">
             </form>
-            <p>you will get <?= $_GET['amountEuro'] * $rateJapan ?> </p>
+            <p>you will get <?php echo $result ?> </p>
         </div>
     </main>
 
